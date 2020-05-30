@@ -28,7 +28,6 @@ open abstract class PBSplashActivity : PBBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         PBApplication.getInstance().context = this@PBSplashActivity
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_splash)
         initValues()
     }
 
@@ -97,7 +96,23 @@ open abstract class PBSplashActivity : PBBaseActivity() {
 
     protected fun setRedirectActivity(
         className: String,
-        splashDuration: Long,
+        checkPermission: Boolean,
+        lpermissions: Array<String> = emptyArray()
+    ) {
+        isCheckPermission = checkPermission
+        if (isCheckPermission && !lpermissions.isNullOrEmpty()) {
+            permissions = lpermissions
+        }
+        redirectClassName = className
+        handler.postDelayed(runnable, getSplashInterval())
+    }
+
+    /**
+     * to set the redirect activity class from splash page
+     */
+
+    protected fun <T> setRedirectActivityClass(
+        className: Class<T>,
         checkPermission: Boolean,
         lpermissions: Array<String>
     ) {
@@ -105,9 +120,11 @@ open abstract class PBSplashActivity : PBBaseActivity() {
         if (isCheckPermission && !lpermissions.isNullOrEmpty()) {
             permissions = lpermissions
         }
-        redirectClassName = className
-        handler.postDelayed(runnable, splashDuration)
+    //    setRedirectClassName(className)
+        handler.postDelayed(runnable, getSplashInterval())
     }
+
+
 
     val runnable = Runnable {
         if (isCheckPermission) {

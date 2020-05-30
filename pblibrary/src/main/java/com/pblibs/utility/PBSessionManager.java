@@ -2,6 +2,7 @@ package com.pblibs.utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import com.pblibs.base.PBApplication;
 import com.pblibs.pbinterfaces.LogoutCallback;
 
@@ -17,18 +18,20 @@ public class PBSessionManager {
     private Context mContext;
     private PBUtils mPbUtils;
 
-    private PBSessionManager() {
-        mContext = PBApplication.getInstance().getContext();
+    private PBSessionManager(Context context) {
+        mContext = context;
         mPbUtils = PBUtils.getInstance();
+        if (mContext == null)
+            return;
         mPreference = mContext.getSharedPreferences(PBConstants.PREF_NAME, PBConstants.PRIVATE_MODE);
         mEditor = mPreference.edit();
     }
 
-    public static PBSessionManager getInstance() {
+    public static PBSessionManager getInstance(Context context) {
         if (mInstance == null) {
             synchronized (PBSessionManager.class) {
                 if (mInstance == null) {
-                    mInstance = new PBSessionManager();
+                    mInstance = new PBSessionManager(context);
                 }
             }
         }
@@ -157,6 +160,23 @@ public class PBSessionManager {
 
     public static int getInt(String key, int defaultValue) {
         return mPreference.getInt(key, defaultValue);
+    }
+
+    /**
+     * To save auth token
+     */
+
+    public void saveAuthToken(String token) {
+        mEditor.putString(PBConstants.TOKEN, token);
+        mEditor.apply();
+    }
+
+    /**
+     * To fetch auth token
+     */
+
+    public String fetchAuthToken() {
+        return mPreference.getString(PBConstants.TOKEN, null);
     }
 
 }

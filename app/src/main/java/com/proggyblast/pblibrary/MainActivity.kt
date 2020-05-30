@@ -7,8 +7,8 @@ class MainActivity : PBSplashActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSplashContent(getText(R.string.app_name).toString(), R.drawable.fallback_logo)
-        //setRedirectActivity("view.auth.SignInActivity", PBConstants.SPLASH_INTERVAL, true, newpermissions)
+//        setSplashContent(getText(R.string.app_name).toString(), R.drawable.fallback_logo)
+  //      setRedirectActivity("view.auth.SignInActivity", true)
         //setContentView(R.layout.activity_main)
     }
 

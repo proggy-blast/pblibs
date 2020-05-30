@@ -13,11 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import com.pblibs.utility.PBSessionManager;
 
-abstract public class PBBaseFragment extends Fragment {
+abstract public class PBBaseFragment extends Fragment implements View.OnClickListener {
 
     protected Context mContext;
     protected Activity mActivity;
-    protected PBSessionManager mPbSessionManager;
     protected View mView;
     protected String mUserId;
 
@@ -25,8 +24,8 @@ abstract public class PBBaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
-        mContext = PBApplication.getInstance().getContext();
-        mPbSessionManager = PBSessionManager.getInstance();
+        mContext = PBApplication.getInstance().getContext() != null ? PBApplication.getInstance().getContext() :
+                getContext();
     }
 
     @Nullable

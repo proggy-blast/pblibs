@@ -1,45 +1,37 @@
 package com.pblibs.uiwidgets
 
-import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.pblibrary.proggyblast.R
+import com.pblibs.base.PBBaseActivity
 import com.pblibs.model.GalleryModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_gallery_viewpager.view.*
-import kotlinx.android.synthetic.main.layout_viewpager.view.*
+import kotlinx.android.synthetic.main.child_viewpager.view.*
+import kotlinx.android.synthetic.main.layout_viewpager.*
 
 /**
- * Created by balaji on 12/5/20 4:54 PM
+ * Created by Proggy Blast on 12/5/20 4:54 PM
  */
 
-abstract open class GalleryViewPager(context: Context) : ViewPager(context), ViewPager.OnPageChangeListener {
+abstract class GalleryViewPager : PBBaseActivity(), ViewPager.OnPageChangeListener {
 
-    private var mGalleryList: List<GalleryModel>
+    private var mGalleryList: List<GalleryModel>? = null
 
-    init {
+    override fun getContentView(): Int {
+        return R.layout.layout_viewpager
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mGalleryList = getLayoutList()
         viewPager.addOnPageChangeListener(this)
-        val adapter = GalleryViewPagerAdapter(mGalleryList)
+        val adapter = GalleryViewPagerAdapter(mGalleryList!!)
         viewPager.adapter = adapter
-    }
-
-    override fun onPageScrollStateChanged(state: Int) {
-
-    }
-
-    override fun onPageSelected(position: Int) {
-    }
-
-    override fun onPageScrolled(position: Int, offset: Float, offsetPixels: Int) {
-        super.onPageScrolled(position, offset, offsetPixels)
-    }
-
-    override fun setCurrentItem(item: Int) {
-        super.setCurrentItem(getSelectedItem())
+        viewPager.setCurrentItem(getSelectedItem())
     }
 
     class GalleryViewPagerAdapter(mGalleryList: List<GalleryModel>) : PagerAdapter() {
@@ -52,7 +44,7 @@ abstract open class GalleryViewPager(context: Context) : ViewPager(context), Vie
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val view = LayoutInflater.from(container.context)
-                .inflate(R.layout.activity_gallery_viewpager, container, false)
+                .inflate(R.layout.child_viewpager, container, false)
             try {
                 val image = mLayoutList.get(position).imagePath
                 if (!image.isEmpty()) {

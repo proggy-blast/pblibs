@@ -11,14 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,11 +32,12 @@ import com.pblibrary.proggyblast.BuildConfig;
 import com.pblibrary.proggyblast.R;
 import com.pblibs.utility.GenericModel;
 import com.pblibs.utility.PBFileOperations;
-import com.pblibs.utility.PBSessionManager;
 
 import java.io.File;
 
-import static com.pblibs.utility.PBConstants.*;
+import static com.pblibs.utility.PBConstants.ONE;
+import static com.pblibs.utility.PBConstants.PROVIDER;
+import static com.pblibs.utility.PBConstants.ZERO;
 
 public abstract class PBBaseActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,15 +49,15 @@ public abstract class PBBaseActivity extends AppCompatActivity implements View.O
     public static boolean isPermissionGranted = false;
     public Context mContext;
     public View mView;
-    public PBSessionManager mPbSessionManager;
     private File photoFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentView());
-        mContext = PBApplication.getInstance().getContext();
-        mPbSessionManager = PBSessionManager.getInstance();
+        mContext = PBApplication.getInstance().getContext() != null ? PBApplication.getInstance().getContext() :
+                PBBaseActivity.this;
+        mView = LayoutInflater.from(mContext).inflate(getContentView(), null, false);
+        setContentView(mView);
     }
 
     /**
@@ -96,6 +96,27 @@ public abstract class PBBaseActivity extends AppCompatActivity implements View.O
         try {
             Class aClass = Class.forName(mContext.getPackageName() + "." + redirectClassName.trim());
             Intent intent = new Intent(PBApplication.getInstance().getContext(), aClass);
+            if (isNewActivity) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            if (bundle != null) {
+                intent.putExtras(bundle);
+            }
+            PBApplication.getInstance().getContext().startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Navigate to next activity
+     *
+     * @param className
+     */
+
+    public <T> void navigateActivity(Class<T> className, boolean isNewActivity, Bundle bundle) {
+        try {
+            Intent intent = new Intent(PBApplication.getInstance().getContext(), className);
             if (isNewActivity) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
@@ -259,5 +280,7 @@ public abstract class PBBaseActivity extends AppCompatActivity implements View.O
     }
 
     public abstract int getContentView();
+
+    public abstract String getScreenName();
 
 }

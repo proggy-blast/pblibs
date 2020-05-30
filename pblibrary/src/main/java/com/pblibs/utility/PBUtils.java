@@ -701,4 +701,25 @@ public class PBUtils {
             return EMPTY;
         }
     }
+
+    /**
+     * To check if device is rooted or not
+     */
+
+    public static boolean isDeviceRooted(){
+        return checkRootMethod1();
+    }
+
+    private static boolean checkRootMethod1(){
+        String buildTags=android.os.Build.TAGS;
+        return buildTags!=null && buildTags.contains("test-keys");
+    }
+
+    private static boolean checkRootMethod2(){
+        String paths[]={"/system/app/Superuser.apk","/sbin/su","/system/bin/su","/system/xbin/su","/data/local/xbin" +
+                "/su","/data/local/bin/su","/system/sd/bin/su","/system/bin/failsafe/su","/data/local/su","/su/bin/su"};
+        return false;
+        //return buildTags!=null && buildTags.contains("test-keys");
+    }
+
 }

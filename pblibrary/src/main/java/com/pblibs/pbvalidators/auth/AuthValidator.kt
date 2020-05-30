@@ -9,7 +9,7 @@ import com.pblibs.utility.PBConstants
 import com.pblibs.utility.PBUtils
 
 /**
- * Created by balaji on 11/4/20 8:37 PM
+ * Created by Proggy Blast on 11/4/20 8:37 PM
  */
 
 
@@ -23,7 +23,7 @@ class AuthValidator {
 
         fun validateLogin(loginRequest: LoginRequest): String {
             val mContext: Context = PBApplication.getInstance().context
-            val mPbUtils = PBUtils()
+            val mPbUtils = PBUtils.getInstance()
             val isEmailAvail = loginRequest.userEmail !== PBConstants.DEFAULT
             val isUsernameAvail = loginRequest.username !== PBConstants.DEFAULT
             val isMobileNumAvail = loginRequest.mobileNumber !== PBConstants.DEFAULT
@@ -48,7 +48,7 @@ class AuthValidator {
          */
 
         fun validateForgotPassword(forgotPwdRequest: ForgotPwdRequest): String {
-            val mPbUtils = PBUtils()
+            val mPbUtils = PBUtils.getInstance()
             val isEmailAvail = forgotPwdRequest.userEmail !== PBConstants.DEFAULT
             val isMobileNumAvail = forgotPwdRequest.mobileNumber !== PBConstants.DEFAULT
             var emailUsernameVal = PBConstants.EMPTY
