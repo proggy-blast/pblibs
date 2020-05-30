@@ -73,10 +73,10 @@ public class VolleyNetworkFetch {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                String contentType = PBSessionManager.getInstance().getString(PBConstants.CONTENT_TYPE,
+                String contentType = PBSessionManager.getInstance(mContext).getString(PBConstants.CONTENT_TYPE,
                         PBConstants.URL_ENCODED_TYPE);
                 params.put(PBConstants.CONTENT_TYPE, contentType);
-                String token = PBSessionManager.getInstance().getString(PBConstants.TOKEN, "");
+                String token = PBSessionManager.getInstance(mContext).getString(PBConstants.TOKEN, "");
                 if (!token.isEmpty() && !token.equals("null")) {
                     params.put(PBConstants.AUTHORIZATION, "Bearer " + token);
                 }
@@ -113,10 +113,10 @@ public class VolleyNetworkFetch {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                String contentType = PBSessionManager.getInstance().getString(PBConstants.CONTENT_TYPE,
+                String contentType = PBSessionManager.getInstance(mContext).getString(PBConstants.CONTENT_TYPE,
                         PBConstants.URL_ENCODED_TYPE);
                 params.put(PBConstants.CONTENT_TYPE, contentType);
-                String token = PBSessionManager.getInstance().getString(PBConstants.TOKEN, "");
+                String token = PBSessionManager.getInstance(mContext).getString(PBConstants.TOKEN, "");
                 if (!token.isEmpty() && !token.equals("null")) {
                     params.put(PBConstants.AUTHORIZATION, "Bearer " + token);
                 }
@@ -152,10 +152,10 @@ public class VolleyNetworkFetch {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                String contentType = PBSessionManager.getInstance().getString(PBConstants.CONTENT_TYPE,
+                String contentType = PBSessionManager.getInstance(mContext).getString(PBConstants.CONTENT_TYPE,
                         PBConstants.URL_ENCODED_TYPE);
                 params.put(PBConstants.CONTENT_TYPE, contentType);
-                String token = PBSessionManager.getInstance().getString(PBConstants.TOKEN, "");
+                String token = PBSessionManager.getInstance(mContext).getString(PBConstants.TOKEN, "");
                 if (!token.isEmpty() && !token.equals("null")) {
                     params.put(PBConstants.AUTHORIZATION, "Bearer " + token);
                 }

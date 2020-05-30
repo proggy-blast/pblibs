@@ -19,4 +19,8 @@ class MainActivity : PBSplashActivity() {
     override fun getContentView(): Int {
         return R.layout.activity_main
     }
+
+    override fun getScreenName(): String {
+        return MainActivity::class.java.simpleName
+    }
 }
