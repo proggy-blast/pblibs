@@ -59,8 +59,8 @@ class GetCurrentLocation(activity: Activity) {
             fusedLocationClient?.lastLocation?.addOnSuccessListener { location ->
                 if (location != null) {
                     mLocation = location
-                    PBSessionManager.setString(PBConstants.LATITUDE, location.latitude.toString())
-                    PBSessionManager.setString(PBConstants.LONGITUDE, location.longitude.toString())
+                    PBSessionManager.getInstance(mActivity).setString(PBConstants.LATITUDE, location.latitude.toString())
+                    PBSessionManager.getInstance(mActivity).setString(PBConstants.LONGITUDE, location.longitude.toString())
                 }
             }
         }
