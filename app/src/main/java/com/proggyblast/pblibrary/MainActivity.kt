@@ -2,6 +2,7 @@ package com.proggyblast.pblibrary
 
 import android.os.Bundle
 import com.pblibs.ftue.PBSplashActivity
+import com.pblibs.utility.PBSessionManager
 
 class MainActivity : PBSplashActivity() {
 

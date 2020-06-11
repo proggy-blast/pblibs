@@ -21,6 +21,7 @@
     <string name="sign_up" translatable="false">Sign Up</string>
     <string name="sign_out" translatable="false">Sign Out</string>
     <string name="email" translatable="false">Email</string>
+    <string name="email_address" translatable="false">Email Address</string>
     <string name="password" translatable="false">Password</string>
     <string name="forgot_password" translatable="false">Forgot Password?</string>
     <string name="forgot_password_title" translatable="false">Forgot Password</string>

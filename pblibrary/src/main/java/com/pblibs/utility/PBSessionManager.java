@@ -13,8 +13,8 @@ import com.pblibs.pbinterfaces.LogoutCallback;
 public class PBSessionManager {
 
     private static PBSessionManager mInstance;
-    private static SharedPreferences mPreference;
-    private static SharedPreferences.Editor mEditor;
+    private SharedPreferences mPreference;
+    private SharedPreferences.Editor mEditor;
     private Context mContext;
     private PBUtils mPbUtils;
 
@@ -44,7 +44,7 @@ public class PBSessionManager {
      * @return
      */
 
-    public static boolean isFirstTimeLaunch() {
+    public boolean isFirstTimeLaunch() {
         return mPreference.getBoolean(PBConstants.IS_FIRST_TIME_LAUNCH, true);
     }
 
@@ -54,7 +54,7 @@ public class PBSessionManager {
      * @param isFirstTime
      */
 
-    public static void setFirstTimeLaunch(boolean isFirstTime) {
+    public void setFirstTimeLaunch(boolean isFirstTime) {
         mEditor.putBoolean(PBConstants.IS_FIRST_TIME_LAUNCH, isFirstTime);
         mEditor.commit();
     }
@@ -65,7 +65,7 @@ public class PBSessionManager {
      * @return
      */
 
-    public static boolean isUserLoggedIn() {
+    public  boolean isUserLoggedIn() {
         if (getUserId().isEmpty() || getUserId().trim().length() == 0) {
             return false;
         }
@@ -78,7 +78,7 @@ public class PBSessionManager {
      * @return
      */
 
-    public static String getUserId() {
+    public  String getUserId() {
         return mPreference.getString(PBConstants.USER_ID, "");
     }
 
@@ -88,7 +88,7 @@ public class PBSessionManager {
      * @param callback
      */
 
-    public static void logoutUser(LogoutCallback callback) {
+    public  void logoutUser(LogoutCallback callback) {
         mEditor.clear();
         mEditor.commit();
         callback.onLogoutSuccess();
@@ -98,7 +98,7 @@ public class PBSessionManager {
      * set the string param with value
      */
 
-    public static void setString(String key, String value) {
+    public  void setString(String key, String value) {
         mEditor.putString(key, value);
         mEditor.commit();
     }
@@ -107,7 +107,7 @@ public class PBSessionManager {
      * set the string param with value
      */
 
-    public static String getString(String key, String defaultValue) {
+    public  String getString(String key, String defaultValue) {
         return mPreference.getString(key, defaultValue);
     }
 
@@ -115,7 +115,7 @@ public class PBSessionManager {
      * set the float param with value
      */
 
-    public static void setFloat(String key, float value) {
+    public  void setFloat(String key, float value) {
         mEditor.putFloat(key, value);
         mEditor.commit();
     }
@@ -124,7 +124,7 @@ public class PBSessionManager {
      * set the string param with value
      */
 
-    public static float getFloat(String key, float defaultValue) {
+    public  float getFloat(String key, float defaultValue) {
         return mPreference.getFloat(key, defaultValue);
     }
 
@@ -132,7 +132,7 @@ public class PBSessionManager {
      * set the boolean param with value
      */
 
-    public static void setBoolean(String key, boolean value) {
+    public  void setBoolean(String key, boolean value) {
         mEditor.putBoolean(key, value);
         mEditor.commit();
     }
@@ -141,7 +141,7 @@ public class PBSessionManager {
      * get the boolean param with value
      */
 
-    public static boolean getBoolean(String key, boolean defaultValue) {
+    public  boolean getBoolean(String key, boolean defaultValue) {
         return mPreference.getBoolean(key, defaultValue);
     }
 
@@ -149,7 +149,7 @@ public class PBSessionManager {
      * set the int param with value
      */
 
-    public static void setInt(String key, int value) {
+    public  void setInt(String key, int value) {
         mEditor.putInt(key, value);
         mEditor.commit();
     }
@@ -158,7 +158,7 @@ public class PBSessionManager {
      * get the int param with value
      */
 
-    public static int getInt(String key, int defaultValue) {
+    public  int getInt(String key, int defaultValue) {
         return mPreference.getInt(key, defaultValue);
     }
 

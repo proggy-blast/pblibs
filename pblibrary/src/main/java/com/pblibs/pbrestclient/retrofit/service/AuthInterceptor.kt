@@ -1,6 +1,7 @@
 package com.pblibs.pbrestclient.retrofit.service
 
 import android.content.Context
+import com.pblibs.utility.PBConstants
 import com.pblibs.utility.PBSessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -19,8 +20,11 @@ class AuthInterceptor(context: Context) : Interceptor {
 
         sessionManager.fetchAuthToken()?.let {
             requestBuilder.addHeader("Authorization", "Bearer $it")
-            requestBuilder.addHeader("Content-Type", "application/json")
-            requestBuilder.addHeader("Accept", "application/json")
+            requestBuilder.addHeader(
+                "Content-Type",
+                PBSessionManager.getString(PBConstants.CONTENT_TYPE, "application/json")
+            )
+            requestBuilder.addHeader("Accept", PBSessionManager.getString(PBConstants.CONTENT_TYPE, "application/json"))
         }
 
         return chain.proceed(requestBuilder.build())

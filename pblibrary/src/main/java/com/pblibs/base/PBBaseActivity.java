@@ -50,6 +50,7 @@ public abstract class PBBaseActivity extends AppCompatActivity implements View.O
     public Context mContext;
     public View mView;
     private File photoFile;
+    protected String TAG;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public abstract class PBBaseActivity extends AppCompatActivity implements View.O
                 PBBaseActivity.this;
         mView = LayoutInflater.from(mContext).inflate(getContentView(), null, false);
         setContentView(mView);
+        TAG=getScreenName();
     }
 
     /**
