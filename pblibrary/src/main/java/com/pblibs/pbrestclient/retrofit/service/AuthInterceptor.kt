@@ -20,12 +20,13 @@ class AuthInterceptor(context: Context) : Interceptor {
 
         sessionManager.fetchAuthToken()?.let {
             requestBuilder.addHeader("Authorization", "Bearer $it")
-            requestBuilder.addHeader(
-                "Content-Type",
-                PBSessionManager.getString(PBConstants.CONTENT_TYPE, "application/json")
-            )
-            requestBuilder.addHeader("Accept", PBSessionManager.getString(PBConstants.CONTENT_TYPE, "application/json"))
         }
+
+        requestBuilder.addHeader(
+            "Content-Type",
+            sessionManager.getString(PBConstants.CONTENT_TYPE, "application/json")
+        )
+        requestBuilder.addHeader("Accept", sessionManager.getString(PBConstants.CONTENT_TYPE, "application/json"))
 
         return chain.proceed(requestBuilder.build())
     }

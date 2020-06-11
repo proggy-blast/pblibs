@@ -20,7 +20,7 @@ class RetrofitService {
         private val context = PBApplication.getInstance().context
         private val sessionManager = PBSessionManager.getInstance(context)
 
-        val retrofit = Retrofit.Builder().baseUrl(PBSessionManager.getString(PBConstants.BASE_URL, ""))
+        val retrofit = Retrofit.Builder().baseUrl(sessionManager.getString(PBConstants.BASE_URL, ""))
             .addConverterFactory(GsonConverterFactory.create())
             .client(okhttpClient(context))
             .build()
