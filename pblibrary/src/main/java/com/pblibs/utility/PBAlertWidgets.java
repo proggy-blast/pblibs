@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.pblibs.base.PBApplication;
 import com.pblibs.pbinterfaces.DialogActionCallback;
 
@@ -99,9 +100,9 @@ public class PBAlertWidgets {
     }
 
 
-    public void showSnack(View view, String message, String action, int length, boolean isSuccess) {
+    public static void showSnack(View view, String message, String action, int length, boolean isSuccess) {
         if (isSuccess) {
-
+            Snackbar.make(view,message,length);
         }
     }
 
